@@ -26,11 +26,15 @@ package string;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * DuplicateCharacterSnippet.
  */
 public class DuplicateCharacterSnippet {
+
+  private DuplicateCharacterSnippet() {
+  }
 
   /**
    * Remove Duplicate Characters from a string.
@@ -40,11 +44,9 @@ public class DuplicateCharacterSnippet {
    */
 
   public static String removeDuplicateCharacters(String str) {
-    char[] charsOfStr = str.toCharArray();
-    Set<String> uniqueCharacters = new HashSet<>();
-    for (char character : charsOfStr) {
-      uniqueCharacters.add(String.valueOf(character));
-    }
+    Set<String> uniqueCharacters = str.chars()
+        .mapToObj(c -> String.valueOf((char) c))
+        .collect(Collectors.toCollection(HashSet::new));
     return String.join("", uniqueCharacters);
   }
 }
