@@ -3,3 +3,7 @@
 java-snippets.iml
 out/
 build/
+.DS_Store
+.classpath
+.claude
+.github
