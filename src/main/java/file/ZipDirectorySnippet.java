@@ -72,8 +72,8 @@ public class ZipDirectorySnippet {
     if (fileToZip.isDirectory()) {
       // Add the "/" mark explicitly to preserve structure while unzipping action is performed
       var dirName = fileName.endsWith("/") ? fileName : fileName + "/";
-      zipOut.putNextEntry(new ZipEntry(dirName));
-      zipOut.closeEntry(); // NOSONAR directory entries are empty by design
+      zipOut.putNextEntry(new ZipEntry(dirName)); // NOSONAR directory entries are empty by design
+      zipOut.closeEntry();
       var children = fileToZip.listFiles();
       for (var childFile : children) { // Recursively apply function to all children
         zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
