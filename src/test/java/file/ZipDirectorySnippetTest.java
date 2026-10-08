@@ -47,10 +47,9 @@ class ZipDirectorySnippetTest {
   void testZipFileDirectory() throws IOException {
     final var src = "src/test/resources/dir3";
     final var dst = "src/test/resources/dir3.zip";
-    try {
-      ZipDirectorySnippet.zipDirectory(src, dst);
-      assertTrue(Files.exists(Paths.get(dst)));
-      var zipFile = new ZipFile(Paths.get(dst).toFile());
+    ZipDirectorySnippet.zipDirectory(src, dst);
+    assertTrue(Files.exists(Paths.get(dst)));
+    try (var zipFile = new ZipFile(Paths.get(dst).toFile())) {
       var regularFiles = 0;
       var directories = 0;
       var zipEntries = zipFile.entries();
@@ -64,7 +63,6 @@ class ZipDirectorySnippetTest {
       assertEquals(4, zipFile.size());
       assertEquals(2, directories); // The root directory + inner directory
       assertEquals(2, regularFiles); // Two simple files
-      zipFile.close();
     } finally {
       Files.deleteIfExists(new File(dst).toPath());
     }

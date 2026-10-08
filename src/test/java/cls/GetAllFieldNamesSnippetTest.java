@@ -41,11 +41,13 @@ class GetAllFieldNamesSnippetTest {
   void testGetAllFieldNames() {
     class SuperClass {
       public int superFieldOne;
+      @SuppressWarnings("java:S1068") // read via reflection
       private int superFieldTwo;
     }
 
     class TestClass extends SuperClass {
       public int fieldOne;
+      @SuppressWarnings("java:S1068") // read via reflection
       private int fieldTwo;
     }
 

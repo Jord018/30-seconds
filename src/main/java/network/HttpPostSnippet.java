@@ -66,6 +66,8 @@ public class HttpPostSnippet {
             .POST(HttpRequest.BodyPublishers.ofByteArray(out))
             .build();
 
-    return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+    try (var client = HttpClient.newHttpClient()) {
+      return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
   }
 }

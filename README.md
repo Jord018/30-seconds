@@ -996,23 +996,6 @@ public class GetAllPublicFieldNamesSnippet {
 public class AddDaysToDateSnippet {
 
   /**
-   * Add days to given date.
-   *
-   * @param date given date
-   * @param noOfDays number of days to add
-   * @return modified date
-   */
-  public static Date addDaysToDate(Date date, int noOfDays) {
-    if (date != null) {
-      Calendar cal = Calendar.getInstance();
-      cal.setTime(date);
-      cal.add(Calendar.DAY_OF_MONTH, noOfDays);
-      return cal.getTime();
-    }
-    return null;
-  }
-
-  /**
    * Add days to local date.
    *
    * @param date given local date
@@ -1936,11 +1919,12 @@ public class HttpGetSnippet {
    * @throws Exception i/o error, interruption error, etc
    */
   public static HttpResponse<String> httpGet(String uri) throws Exception {
-    var client = HttpClient.newHttpClient();
     var request = HttpRequest.newBuilder()
             .uri(URI.create(uri))
             .build();
-    return client.send(request, HttpResponse.BodyHandlers.ofString());
+    try (var client = HttpClient.newHttpClient()) {
+      return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
   }
 }
 ```
@@ -1974,7 +1958,9 @@ public class HttpPostSnippet {
             .POST(HttpRequest.BodyPublishers.ofByteArray(out))
             .build();
 
-    return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+    try (var client = HttpClient.newHttpClient()) {
+      return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
   }
 }
 ```
@@ -2261,12 +2247,11 @@ public class StringToDateSnippet {
    *
    * @param date   the date string
    * @param format expected date format
-   * @return Date
-   * @throws ParseException in case of an unparseable date string
+   * @return LocalDate
+   * @throws DateTimeParseException in case of an unparseable date string
    */
-  public static Date stringToDate(String date, String format) throws ParseException {
-    var simpleDateFormat = new SimpleDateFormat(format);
-    return simpleDateFormat.parse(date);
+  public static LocalDate stringToDate(String date, String format) {
+    return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
   }
 }
 ```
