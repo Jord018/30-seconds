@@ -44,4 +44,40 @@ public class BinarySearchIn2dArraySnippetTest {
     int[] ans2 = {-1, -1};
     Assertions.assertArrayEquals(ans2, BinarySearchIn2dArraySnippet.binarySearchIn2darr(arr2, 69));
   }
+
+  /**
+   * Every element of the matrix is found at its own position, and misses return {-1, -1}.
+   */
+  @Test
+  void testFindsEveryElement() {
+    int[][] matrix = {{3, 4, 7, 9}, {12, 24, 26, 29}, {34, 55, 88, 99}, {100, 189, 232, 234}};
+    for (int r = 0; r < matrix.length; r++) {
+      for (int c = 0; c < matrix[r].length; c++) {
+        Assertions.assertArrayEquals(new int[]{r, c},
+            BinarySearchIn2dArraySnippet.binarySearchIn2darr(matrix, matrix[r][c]));
+      }
+    }
+    int[] notFound = {-1, -1};
+    Assertions.assertArrayEquals(notFound,
+        BinarySearchIn2dArraySnippet.binarySearchIn2darr(matrix, 1));
+    Assertions.assertArrayEquals(notFound,
+        BinarySearchIn2dArraySnippet.binarySearchIn2darr(matrix, 30));
+    Assertions.assertArrayEquals(notFound,
+        BinarySearchIn2dArraySnippet.binarySearchIn2darr(matrix, 999));
+  }
+
+  /**
+   * Two-row and single-row matrices.
+   */
+  @Test
+  void testSmallMatrices() {
+    int[][] twoRows = {{1, 2, 3}, {4, 5, 6}};
+    Assertions.assertArrayEquals(new int[]{0, 1},
+        BinarySearchIn2dArraySnippet.binarySearchIn2darr(twoRows, 2));
+    Assertions.assertArrayEquals(new int[]{1, 2},
+        BinarySearchIn2dArraySnippet.binarySearchIn2darr(twoRows, 6));
+    int[][] oneRow = {{1, 2, 3}};
+    Assertions.assertArrayEquals(new int[]{0, 2},
+        BinarySearchIn2dArraySnippet.binarySearchIn2darr(oneRow, 3));
+  }
 }

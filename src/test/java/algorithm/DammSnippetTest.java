@@ -26,9 +26,12 @@ package algorithm;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import org.junit.jupiter.api.Test;
 
 
@@ -122,5 +125,25 @@ class DammSnippetTest {
     long invalidNumber = 5723L;
     boolean isValidInvalid = DammSnippet.validate(invalidNumber);
     assertFalse(isValidInvalid);
+  }
+
+  /**
+   * Test for generating checksum with a long input.
+   */
+  @Test
+  void testGenerateCheckSumWithLong() {
+    assertEquals(5724L, DammSnippet.generateCheckSum(572L));
+  }
+
+  /**
+   * The utility class must not be instantiable.
+   */
+  @Test
+  void testConstructorThrows() throws NoSuchMethodException {
+    Constructor<DammSnippet> constructor = DammSnippet.class.getDeclaredConstructor();
+    constructor.setAccessible(true);
+    InvocationTargetException e =
+        assertThrows(InvocationTargetException.class, constructor::newInstance);
+    assertInstanceOf(UnsupportedOperationException.class, e.getCause());
   }
 }
