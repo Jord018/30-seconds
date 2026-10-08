@@ -2,7 +2,7 @@ name: Java PR Builder with Gradle
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:

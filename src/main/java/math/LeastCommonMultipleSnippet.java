@@ -31,6 +31,7 @@ public class LeastCommonMultipleSnippet {
 
   private LeastCommonMultipleSnippet() {
   }
+
   /**
    * Least common multiple  calculation.
    *
