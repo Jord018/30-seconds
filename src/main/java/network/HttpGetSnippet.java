@@ -47,10 +47,11 @@ public class HttpGetSnippet {
    * @throws InterruptedException if the operation is interrupted
    */
   public static HttpResponse<String> httpGet(String uri) throws IOException, InterruptedException {
-    var client = HttpClient.newHttpClient();
     var request = HttpRequest.newBuilder()
             .uri(URI.create(uri))
             .build();
-    return client.send(request, HttpResponse.BodyHandlers.ofString());
+    try (var client = HttpClient.newHttpClient()) {
+      return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
   }
 }

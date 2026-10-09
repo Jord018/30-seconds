@@ -1936,11 +1936,12 @@ public class HttpGetSnippet {
    * @throws Exception i/o error, interruption error, etc
    */
   public static HttpResponse<String> httpGet(String uri) throws Exception {
-    var client = HttpClient.newHttpClient();
     var request = HttpRequest.newBuilder()
             .uri(URI.create(uri))
             .build();
-    return client.send(request, HttpResponse.BodyHandlers.ofString());
+    try (var client = HttpClient.newHttpClient()) {
+      return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
   }
 }
 ```
@@ -1974,7 +1975,9 @@ public class HttpPostSnippet {
             .POST(HttpRequest.BodyPublishers.ofByteArray(out))
             .build();
 
-    return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+    try (var client = HttpClient.newHttpClient()) {
+      return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
   }
 }
 ```

@@ -1,0 +1,12 @@
+{
+  "lastQuery": "แก้2bug ที่เจอในsonar qube",
+  "perAgentQuery": {},
+  "graftReads": 0,
+  "sourceReads": 0,
+  "savedTokens": 0,
+  "injectedPointers": [],
+  "nudges": 0,
+  "inputCostMicros": 157252,
+  "inputTokensBilled": 428569,
+  "lastBillingUuid": "5749c11a-29da-404d-8ecd-0dd2573c18ce"
+}
