@@ -7,3 +7,5 @@ build/
 .classpath
 .claude
 .github
+bin/
+.qodo/
