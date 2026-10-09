@@ -1,12 +1,12 @@
 {
-  "lastQuery": "แก้2bug ที่เจอในsonar qube",
+  "lastQuery": "<pasted_content id=\"954c\">\nsrc/main/java/network/HttpPostSnippet.java\n\n\nUse try-with-resources or close this \"HttpClient\" in a \"finally\" clause.\n\"\nBug\n\n\n1\nBlocker\n\n\ncwe\nsymbolic-execution\n...\n+\n\n\nOpen\n\nNot assigned\n\nL69\n5min effort\n2 days ago\nsrc/main/java/network/HttpGetSnippet.java\n\n\nUse try-with-resources or close this \"HttpClient\" in a \"finally\" clause.\n\"\nBug\n\n\n1\nBlocker\n\n\ncwe\nsymbolic-execution\n...\n+\n\n\nOpen\n\nNot assigned\n\nL50\n5min effort\n2 days ago\nsrc/main/java/file/ZipDirectorySnippet.java\n\n\nWrite content to this archive entry; it is empty.\n\"\nBug\n\n\n4\nCritical\n\n\npitfall\n+\n\n\nOpen\n\nNot assigned\n\nL76\n5min effort\n2 days ago\n</pasted_content id=\"954c\">",
   "perAgentQuery": {},
   "graftReads": 0,
   "sourceReads": 0,
   "savedTokens": 0,
   "injectedPointers": [],
   "nudges": 0,
-  "inputCostMicros": 157252,
-  "inputTokensBilled": 428569,
-  "lastBillingUuid": "5749c11a-29da-404d-8ecd-0dd2573c18ce"
+  "inputCostMicros": 252812,
+  "inputTokensBilled": 851659,
+  "lastBillingUuid": "fcd5b02c-4d96-46f4-b22a-c61196e2fd18"
 }
