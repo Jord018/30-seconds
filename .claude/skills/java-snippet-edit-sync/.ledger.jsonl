@@ -1,0 +1,1 @@
+{"action": "create", "reason": "In this repo, README.md drives the website and must match each snippet. The episode edited HttpGetSnippet and HttpPostSnippet and then had to sync README. A Python rewrite in default text mode turned the CRLF files into LF, and git warned about it. No existing skill covers this repo's snippet layout.", "evidence": "references/evidence-15a3e227.md"}

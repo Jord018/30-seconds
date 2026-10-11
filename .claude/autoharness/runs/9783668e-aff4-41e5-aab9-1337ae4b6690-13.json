@@ -1,0 +1,21 @@
+{
+  "run_id": "9783668e-aff4-41e5-aab9-1337ae4b6690-13",
+  "verdicts": [
+    {
+      "action": "create",
+      "name": "sonarqube-issue-fixing",
+      "ok": false,
+      "findings": [
+        "safety"
+      ],
+      "notes": []
+    },
+    {
+      "action": "create",
+      "name": "java-snippet-edit-sync",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    }
+  ]
+}

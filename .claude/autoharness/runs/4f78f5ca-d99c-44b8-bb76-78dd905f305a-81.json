@@ -1,0 +1,19 @@
+{
+  "run_id": "4f78f5ca-d99c-44b8-bb76-78dd905f305a-81",
+  "verdicts": [
+    {
+      "action": "create",
+      "name": "sonarlint-connected-mode-local-sonarqube",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    },
+    {
+      "action": "create",
+      "name": "gui-secret-transfer-via-clipboard",
+      "ok": true,
+      "findings": [],
+      "notes": []
+    }
+  ]
+}
