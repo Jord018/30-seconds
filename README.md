@@ -1224,14 +1224,10 @@ public class ZipDirectorySnippet {
       return;
     }
     if (fileToZip.isDirectory()) {
-      if (fileName.endsWith("/")) {
-        zipOut.putNextEntry(new ZipEntry(fileName)); // To be zipped next
-        zipOut.closeEntry();
-      } else {
-        // Add the "/" mark explicitly to preserve structure while unzipping action is performed
-        zipOut.putNextEntry(new ZipEntry(fileName + "/"));
-        zipOut.closeEntry();
-      }
+      // Directory entries are empty by design; the trailing "/" preserves structure on unzip
+      var dirName = fileName.endsWith("/") ? fileName : fileName + "/";
+      zipOut.putNextEntry(new ZipEntry(dirName));
+      zipOut.closeEntry();
       var children = fileToZip.listFiles();
       for (var childFile : children) { // Recursively apply function to all children
         zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
@@ -1936,11 +1932,12 @@ public class HttpGetSnippet {
    * @throws Exception i/o error, interruption error, etc
    */
   public static HttpResponse<String> httpGet(String uri) throws Exception {
-    var client = HttpClient.newHttpClient();
     var request = HttpRequest.newBuilder()
             .uri(URI.create(uri))
             .build();
-    return client.send(request, HttpResponse.BodyHandlers.ofString());
+    try (var client = HttpClient.newHttpClient()) {
+      return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
   }
 }
 ```
@@ -1974,7 +1971,9 @@ public class HttpPostSnippet {
             .POST(HttpRequest.BodyPublishers.ofByteArray(out))
             .build();
 
-    return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+    try (var client = HttpClient.newHttpClient()) {
+      return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
   }
 }
 ```
@@ -2046,7 +2045,7 @@ public class CommonLettersSnippet {
 ```java
 public class CompareVersionSnippet {
 
-  private static final String EXTRACT_VERSION_REGEX = ".*?((?<!\\w)\\d+([.-]\\d+)*).*";
+  private static final String EXTRACT_VERSION_REGEX = ".*?((?<!\\w)\\d++(?:[.-]\\d++)*+).*";
 
   /**
    * Compares two version strings.
